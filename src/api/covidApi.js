@@ -3,11 +3,23 @@ import { TIME_PERIODS } from '../contexts/TimeContext';
 
 const BASE_URL = 'https://disease.sh/v3/covid-19';
 
-const getHistoricalData = async (days) => {
-  const [globalData, countriesData] = await Promise.all([
-    axios.get(`${BASE_URL}/historical/all?lastdays=${days}`),
-    axios.get(`${BASE_URL}/historical?lastdays=${days}`)
-  ]);
+const getHistoricalData = async (days = 30) => {
+  const response = await axios.get(`${BASE_URL}/historical/all?lastdays=${days}`);
+  return {
+    tests: response.data.tests,
+    critical: response.data.critical,
+    casesPerOneMillion: response.data.casesPerOneMillion
+  };
+};
+
+export const getGlobalData = async () => {
+  const response = await axios.get(`${BASE_URL}/all`);
+  return {
+    tests: response.data.tests,
+    critical: response.data.critical,
+    casesPerOneMillion: response.data.casesPerOneMillion
+  };
+};
 
   // Get the latest and previous data points
   const dates = Object.keys(globalData.data.cases);
