@@ -1,36 +1,25 @@
-import { 
-  UserGroupIcon, 
-  HeartIcon, 
-  ArrowTrendingUpIcon,
-  XCircleIcon 
-} from '@heroicons/react/24/solid';
+import { BeakerIcon, ExclamationTriangleIcon, ChartBarIcon } from '@heroicons/react/24/outline';
 
 export const STATS_CONFIG = [
   {
-    title: 'Total Cases',
-    value: 'cases',
-    todayValue: 'todayCases',
-    icon: UserGroupIcon,
-    color: 'indigo'
+    id: 'tests',
+    label: 'Total Tests',
+    icon: BeakerIcon,
+    value: (data) => data.tests,
+    historical: (data) => data.tests,
   },
   {
-    title: 'Recovered',
-    value: 'recovered',
-    todayValue: 'todayRecovered',
-    icon: HeartIcon,
-    color: 'green'
+    id: 'critical',
+    label: 'Critical Cases',
+    icon: ExclamationTriangleIcon,
+    value: (data) => data.critical,
+    historical: (data) => data.critical,
   },
   {
-    title: 'Active Cases',
-    value: 'active',
-    icon: ArrowTrendingUpIcon,
-    color: 'amber'
-  },
-  {
-    title: 'Deaths',
-    value: 'deaths',
-    todayValue: 'todayDeaths',
-    icon: XCircleIcon,
-    color: 'red'
+    id: 'casesPerMillion',
+    label: 'Cases Per Million',
+    icon: ChartBarIcon,
+    value: (data) => data.casesPerOneMillion,
+    historical: (data) => data.casesPerOneMillion,
   }
 ];
